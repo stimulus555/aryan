@@ -190,7 +190,7 @@ if fetch_date:
 
         
         # -------------------------------------------------------------
-        # SOLAR SYSTEM CONTEXT AND 3D LINK
+        # SOLAR SYSTEM CONTEXT AND WORKING 3D LINK
         # -------------------------------------------------------------
 
         solar_system_keywords = ['mercury', 'venus', 'earth', 'mars', 'jupiter', 'saturn', 'uranus', 'neptune', 'moon', 'sun', 'comet', 'asteroid', 'aurora', 'planet', 'probe']
@@ -216,25 +216,22 @@ if fetch_date:
                 
             st.markdown("---")
 
-            # 2. Add External 3D Visualization Link
-            nasa_eyes_url = "https://eyes.nasa.gov/apps/solar-system/#/home" 
+            # 2. Add External 3D Visualization Link (CORRECTED to use stable base URL)
             
-            # Construct a more specific link for the external 3D viewer (best effort)
-            if main_body != 'Sun':
-                nasa_eyes_url = f"https://eyes.nasa.gov/apps/solar-system/#/scenarios/planets/Solarsystem/Planet%20View/{main_body}"
-                
+            # This is the most stable link to guarantee the external app opens.
+            nasa_eyes_url = "https://eyes.nasa.gov/apps/solar-system/" 
+            
             st.markdown("### 🚀 Explore the Location in 3D!")
             
             st.link_button(
-                label=f"Click to View {main_body} in NASA's Interactive 3D Model", 
+                label="Click to View Solar System in NASA's Interactive 3D Model", 
                 url=nasa_eyes_url,
-                help="Opens the NASA Eyes on the Solar System website in a new tab.",
+                help=f"Opens the NASA Eyes on the Solar System website in a new tab. You may need to search for '{main_body}' there.",
                 type="primary"
             )
             
-            st.caption("You will be redirected to an external NASA website for the interactive 3D view.")
+            st.caption(f"You will be redirected to an external NASA website. You can manually search for *{main_body}* within the app.")
         
     except Exception as e:
         st.error(f"An error occurred while fetching the APOD: {e}")
-
         st.info("Please ensure the date is correctly formatted (YYYY-MM-DD) and not a future date.")
